@@ -80,6 +80,7 @@ jobs:
           rm -rf ./kernel_platform/common/android/abi_gki_protected_exports_*
       - name: Setup KernelSU
         run: |
+          cd kernel_platform
           curl -LSs "https://raw.githubusercontent.com/rifsxd/KernelSU-Next/next/kernel/setup.sh" | bash -s next-susfs-dev
           git submodule update --init --recursive
           cd KernelSU-Next/kernel
@@ -88,6 +89,7 @@ jobs:
           sed -i "s/DKSU_VERSION=11998/DKSU_VERSION=${KSU_VERSION}/" Makefile
       - name: Setup SUSFS
         run: |
+          cd ..
           set -euxo pipefail
           SUSFS_PATCHES="../../../susfs4ksu/kernel_patches"
           KERNEL_PATCHES="../../../kernel_patches"
@@ -105,6 +107,7 @@ jobs:
           patch -p1 < 50_add_susfs_in_gki-android14-6.1.patch || echo "Warning: SUSFS patch may have been already applied."
           patch -p1 -F 3 < 69_hide_stuff.patch || echo "Warning: 69_hide_stuff patch may have been already applied."
           git diff --quiet --exit-code || (git add -A && git commit -m "BUILD Kernel (SUSFS setup)" || true)
+          cd ..
       - name: Configure Kernel
         run: |
           set -e
