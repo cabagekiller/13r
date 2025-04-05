@@ -80,7 +80,7 @@ jobs:
           rm -rf ./kernel_platform/common/android/abi_gki_protected_exports_*
       - name: Setup KernelSU
         run: |
-          cd kernel_platform
+          cd kernel_platform/oneplus13r_v
           curl -LSs "https://raw.githubusercontent.com/rifsxd/KernelSU-Next/next/kernel/setup.sh" | bash -s next-susfs-dev
           git submodule update --init --recursive
           cd KernelSU-Next/kernel
