@@ -191,4 +191,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: kernel-${{ env.ROOT_DIR }}
-          path: builds/${{ env.ROOT_DIR }}/*.zip
+          path: builds/${{ env.ROOT_DIR }}/*
